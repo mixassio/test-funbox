@@ -7,68 +7,67 @@ export default (router, io) => {
   const generalChannelId = getNextId();
   const randomChannelId = getNextId();
   const defaultState = {
-    channels: [
+    points: [
       { id: generalChannelId, name: 'general', removable: false },
       { id: randomChannelId, name: 'random', removable: false },
     ],
-    currentChannelId: generalChannelId,
+    currentPointId: generalChannelId,
   };
 
   const state = { ...defaultState };
 
   const apiRouter = new Router();
   apiRouter
-    .get('/channels', (ctx) => {
-      ctx.body = state.channels;
+    .get('/points', (ctx) => {
+      ctx.body = state.points;
       ctx.status = 301;
     })
-    .post('/channels', (ctx) => {
+    .post('/points', (ctx) => {
       const { data: { attributes: { name } } } = ctx.request.body;
-      const channel = {
+      const point = {
         name,
         removable: true,
         id: getNextId(),
       };
-      state.channels.push(channel);
+      state.points.push(point);
       ctx.status = 201;
       const data = {
         data: {
-          type: 'channels',
-          id: channel.id,
-          attributes: channel,
+          type: 'points',
+          id: point.id,
+          attributes: point,
         },
       };
       ctx.body = data;
-
-      io.emit('newChannel', data);
+      io.emit('newPoint', data);
     })
-    .delete('/channels/:id', (ctx) => {
-      const channelId = Number(ctx.params.id);
-      state.channels = state.channels.filter(c => c.id !== channelId);
+    .delete('/points/:id', (ctx) => {
+      const pointId = Number(ctx.params.id);
+      state.points = state.points.filter(c => c.id !== pointId);
       ctx.status = 204;
       const data = {
         data: {
-          type: 'channels',
-          id: channelId,
+          type: 'points',
+          id: pointId,
         },
       };
-      io.emit('removeChannel', data);
+      io.emit('removePoint', data);
     })
-    .patch('/channels/:id', (ctx) => {
-      const channelId = Number(ctx.params.id);
-      const channel = state.channels.find(c => c.id === channelId);
+    .patch('/points/:id', (ctx) => {
+      const pointId = Number(ctx.params.id);
+      const point = state.points.find(c => c.id === pointId);
 
       const { attributes } = ctx.request.body.data;
-      channel.name = attributes.name;
+      point.name = attributes.name;
       ctx.status = 204;
       const data = {
         data: {
-          type: 'channels',
-          id: channelId,
-          attributes: channel,
+          type: 'points',
+          id: pointId,
+          attributes: point,
         },
       };
-      io.emit('renameChannel', data);
+      io.emit('renamePoint', data);
     });
 
   return router

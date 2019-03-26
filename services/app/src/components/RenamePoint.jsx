@@ -3,12 +3,12 @@ import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { Button, Modal } from 'react-bootstrap';
 import connect from '../connect';
 
-const mapStateToProps = ({ renameChannel }) => ({
-  renameChannel,
+const mapStateToProps = ({ renamePoint }) => ({
+  renamePoint,
 });
 
 @connect(mapStateToProps)
-@reduxForm({ form: 'renameChannel' })
+@reduxForm({ form: 'renamePoint' })
 class RenameChannel extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -21,12 +21,12 @@ class RenameChannel extends React.Component {
     };
   }
 
-  submitRenameChannel = channelId => async (value) => {
-    const { renameChannel, reset } = this.props;
+  submitRenamePoint = pointId => async (value) => {
+    const { renamePoint, reset } = this.props;
     try {
-      await renameChannel({
+      await renamePoint({
         name: value.text,
-        channelId,
+        pointId,
       });
     } catch (e) {
       throw new SubmissionError({ error: 'Somthing errors' });
@@ -45,7 +45,7 @@ class RenameChannel extends React.Component {
 
   render() {
     const { show } = this.state;
-    const { handleSubmit, submitting, channel: { id: channelId, name } } = this.props;
+    const { handleSubmit, submitting, point: { id: pointId, name } } = this.props;
     return (
       <>
         <Button size="sm" variant="outline-warning" onClick={this.handleShow}><span className="oi oi-pencil" /></Button>
@@ -55,7 +55,7 @@ class RenameChannel extends React.Component {
             <Modal.Title>Rename channel</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <form className="form-inline mt-3" onSubmit={handleSubmit(this.submitRenameChannel(channelId))}>
+            <form className="form-inline mt-3" onSubmit={handleSubmit(this.submitRenamePoint(pointId))}>
               <Field name="text" placeholder={name} required component="input" type="text" disabled={submitting} className="w-75 border border-info" />
               <Button type="submit" variant="warning" disabled={submitting}>RENAME</Button>
             </form>

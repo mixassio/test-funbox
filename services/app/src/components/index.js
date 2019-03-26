@@ -1,4 +1,5 @@
-import Channels from './Channels';
 import App from './App';
+import Points from './Points';
 
-export { Channels, App };
+
+export { App, Points };

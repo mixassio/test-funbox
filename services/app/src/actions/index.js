@@ -2,49 +2,49 @@ import axios from 'axios';
 import { createAction } from 'redux-actions';
 import routes from '../routes';
 
-export const setCurrentChannnelId = createAction('SET_CHANNEL_ID');
+export const setCurrentPointId = createAction('SET_POINT_ID');
 
-export const addChannelRequest = createAction('CHANNEL_ADD_REQUEST');
-export const addChannelSuccess = createAction('CHANNEL_ADD_SUCCESS');
-export const addChannelFailure = createAction('CHANNEL_ADD_FAILURE');
+export const addPointRequest = createAction('POINT_ADD_REQUEST');
+export const addPointSuccess = createAction('POINT_ADD_SUCCESS');
+export const addPointFailure = createAction('POINT_ADD_FAILURE');
 
-export const addChannel = name => async (dispatch) => {
-  dispatch(addChannelRequest());
+export const addPoint = name => async (dispatch) => {
+  dispatch(addPointRequest());
   try {
-    const url = routes.channel();
+    const url = routes.point();
     const data = {
       attributes: { name },
     };
     await axios.post(url, { data });
   } catch (e) {
-    dispatch(addChannelFailure());
+    dispatch(addPointFailure());
     throw e;
   }
 };
 
-export const deleteChannelRequest = createAction('CHANNEL_DELETE_REQUEST');
-export const deleteChannelSuccess = createAction('CHANNEL_DELETE_SUCCESS');
-export const deleteChannelFailure = createAction('CHANNEL_DELETE_FAILURE');
+export const deletePointRequest = createAction('POINT_DELETE_REQUEST');
+export const deletePointSuccess = createAction('POINT_DELETE_SUCCESS');
+export const deletePointFailure = createAction('POINT_DELETE_FAILURE');
 
-export const deleteChannel = id => async (dispatch) => {
-  dispatch(deleteChannelRequest());
+export const deletePoint = id => async (dispatch) => {
+  dispatch(deletePointRequest());
   try {
-    const url = routes.channels(id);
+    const url = routes.points(id);
     await axios.delete(url);
   } catch (e) {
-    dispatch(deleteChannelFailure());
+    dispatch(deletePointFailure());
     throw e;
   }
 };
 
-export const renameChannelRequest = createAction('CHANNEL_RENAME_REQUEST');
-export const renameChannelSuccess = createAction('CHANNEL_RENAME_SUCCESS');
-export const renameChannelFailure = createAction('CHANNEL_RENAME_FAILURE');
+export const renamePointRequest = createAction('POINT_RENAME_REQUEST');
+export const renamePointSuccess = createAction('POINT_RENAME_SUCCESS');
+export const renamePointFailure = createAction('POINT_RENAME_FAILURE');
 
-export const renameChannel = ({ channelId, name }) => async (dispatch) => {
-  dispatch(renameChannelRequest());
+export const renamePoint = ({ pointId, name }) => async (dispatch) => {
+  dispatch(renamePointRequest());
   try {
-    const url = routes.channels(channelId);
+    const url = routes.points(pointId);
     const data = {
       attributes: {
         name,
@@ -52,6 +52,6 @@ export const renameChannel = ({ channelId, name }) => async (dispatch) => {
     };
     await axios.patch(url, { data });
   } catch (e) {
-    dispatch(renameChannelFailure());
+    dispatch(renamePointFailure());
   }
 };

@@ -27,8 +27,8 @@ const user = faker.name.findName();
 cookies.set('name', user);
 
 const initState = {
-  channels: _.keyBy(gon.channels, 'id'),
-  currentChannelId: gon.currentChannelId,
+  points: _.keyBy(gon.points, 'id'),
+  currentPointId: gon.currentPointId,
 };
 const store = createStore(
   reducers,
@@ -42,21 +42,20 @@ const store = createStore(
 // -------------
 const socket = io();
 
-socket.on('newChannel', ({ data: { attributes } }) => {
-  store.dispatch(actions.addChannelSuccess(attributes));
+socket.on('newPoint', ({ data: { attributes } }) => {
+  store.dispatch(actions.addPointSuccess(attributes));
 });
-socket.on('removeChannel', ({ data }) => {
-  store.dispatch(actions.deleteChannelSuccess(data));
+socket.on('removePoint', ({ data }) => {
+  store.dispatch(actions.deletePointSuccess(data));
 });
-socket.on('renameChannel', ({ data }) => {
-  store.dispatch(actions.renameChannelSuccess(data));
+socket.on('renamePoint', ({ data }) => {
+  store.dispatch(actions.renamePointSuccess(data));
 });
 // -------------
 
 if (process.env.NODE_ENV !== 'production') {
   localStorage.debug = 'chat:*';
 }
-
 ReactDOM.render((
   <Provider store={store}>
     <UserProvider value={user}>

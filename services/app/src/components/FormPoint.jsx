@@ -2,31 +2,30 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import connect from '../connect';
 
-
-const mapStateToProps = ({ addChannel }) => ({
-  addChannel,
+const mapStateToProps = ({ addPoint }) => ({
+  addPoint,
 });
 
 @connect(mapStateToProps)
-@reduxForm({ form: 'newChannel' })
-class FormChannel extends React.Component {
+@reduxForm({ form: 'newPoint' })
+class FormPoints extends React.Component {
   constructor(props) {
     super(props);
-    this.inputChannel = React.createRef();
+    this.inputPoint = React.createRef();
   }
 
   componentDidMount() {
-    this.inputChannel.current.getRenderedComponent().focus();
+    this.inputPoint.current.getRenderedComponent().focus();
   }
 
   componentDidUpdate() {
-    this.inputChannel.current.getRenderedComponent().focus();
+    this.inputPoint.current.getRenderedComponent().focus();
   }
 
-  submitChannel = async (value) => {
-    const { reset, addChannel } = this.props;
+  submitPoint = async (value) => {
+    const { reset, addPoint } = this.props;
     try {
-      await addChannel(value.text);
+      await addPoint(value.text);
       reset();
     } catch (e) {
       throw e;
@@ -36,9 +35,9 @@ class FormChannel extends React.Component {
   render() {
     const { handleSubmit, submitting } = this.props;
     return (
-      <form className="form-inline mt-3" onSubmit={handleSubmit(this.submitChannel)}>
+      <form className="form-inline mt-3" onSubmit={handleSubmit(this.submitPoint)}>
         <Field
-          ref={this.inputChannel}
+          ref={this.inputPoint}
           forwardRef
           name="text"
           required
@@ -53,4 +52,4 @@ class FormChannel extends React.Component {
   }
 }
 
-export default FormChannel;
+export default FormPoints;

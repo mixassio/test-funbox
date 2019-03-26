@@ -6,6 +6,8 @@ services:
       context: services/app
       dockerfile: Dockerfile.development
     command: sh -c "make develop"
+    ports:
+      - "3000:3000"
     volumes:
       - "~/.bash_history:/.bash_history"
       - "./services/app:/usr/src/app:cached"

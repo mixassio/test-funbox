@@ -3,12 +3,12 @@ import { Button, Modal } from 'react-bootstrap';
 import { reduxForm, SubmissionError } from 'redux-form';
 import connect from '../connect';
 
-const mapStateToProps = ({ deleteChannel }) => ({
-  deleteChannel,
+const mapStateToProps = ({ deletePoint }) => ({
+  deletePoint,
 });
 
 @connect(mapStateToProps)
-@reduxForm({ form: 'deleteChannel' })
+@reduxForm({ form: 'deletePoint' })
 class DeleteChannel extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -17,10 +17,10 @@ class DeleteChannel extends React.Component {
     };
   }
 
-  delete = idChannel => async () => {
-    const { deleteChannel } = this.props;
+  delete = idPoint => async () => {
+    const { deletePoint } = this.props;
     try {
-      await deleteChannel(idChannel);
+      await deletePoint(idPoint);
     } catch (e) {
       throw new SubmissionError({ error: 'Somthing errors' });
     }
@@ -36,7 +36,7 @@ class DeleteChannel extends React.Component {
 
   render() {
     const { show } = this.state;
-    const { channelId, handleSubmit, submitting } = this.props;
+    const { pointId, handleSubmit, submitting } = this.props;
     return (
       <>
         <Button size="sm" variant="outline-danger" onClick={this.handleShow}><span className="oi oi-x" /></Button>
@@ -48,7 +48,7 @@ class DeleteChannel extends React.Component {
           <Modal.Body>This channel will be deleted with all messages</Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleClose}>Close</Button>
-            <form onSubmit={handleSubmit(this.delete(channelId))}>
+            <form onSubmit={handleSubmit(this.delete(pointId))}>
               <Button type="submit" variant="danger" disabled={submitting}>DELETE</Button>
             </form>
           </Modal.Footer>

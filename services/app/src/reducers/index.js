@@ -4,32 +4,32 @@ import { handleActions } from 'redux-actions';
 import { reducer as formReducer } from 'redux-form';
 import * as actions from '../actions';
 
-const defaultChannel = 1;
+const defaultPoint = 1;
 
-const currentChannelId = handleActions({
-  [actions.setCurrentChannnelId](state, { payload: channelId }) {
-    return channelId;
+const currentPointId = handleActions({
+  [actions.setCurrentPointId](state, { payload: pointId }) {
+    return pointId;
   },
-  [actions.deleteChannelSuccess]() {
-    return defaultChannel;
+  [actions.deletePointSuccess]() {
+    return defaultPoint;
   },
 }, '');
 
-const channels = handleActions({
-  [actions.addChannelSuccess](state, { payload }) {
+const points = handleActions({
+  [actions.addPointSuccess](state, { payload }) {
     return { ...state, [payload.id]: payload };
   },
-  [actions.deleteChannelSuccess](state, { payload }) {
+  [actions.deletePointSuccess](state, { payload }) {
     return _.omit(state, payload.id);
   },
-  [actions.renameChannelSuccess](state, { payload: { id, attributes } }) {
+  [actions.renamePointSuccess](state, { payload: { id, attributes } }) {
     return { ...state, [id]: attributes };
   },
 }, {});
 
 
 export default combineReducers({
-  currentChannelId,
-  channels,
+  currentPointId,
+  points,
   form: formReducer,
 });
