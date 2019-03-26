@@ -1,0 +1,25 @@
+version: '3.3'
+
+services:
+  app:
+    build:
+      context: services/app
+      dockerfile: Dockerfile.development
+    command: sh -c "make develop"
+    volumes:
+      - "~/.bash_history:/.bash_history"
+      - "./services/app:/usr/src/app:cached"
+      - "/tmp:/tmp:delegated"
+  web:
+    build:
+      context: services/nginx
+      dockerfile: Dockerfile
+    ports:
+     - "8080:80"
+    volumes:
+      - "./services/nginx/myConfig.conf:/etc/nginx/conf.d/default.conf"
+    depends_on:
+      - app
+
+volumes:
+  pgdata:
