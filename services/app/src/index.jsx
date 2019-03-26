@@ -28,7 +28,6 @@ cookies.set('name', user);
 
 const initState = {
   channels: _.keyBy(gon.channels, 'id'),
-  messages: _.keyBy(gon.messages, 'id'),
   currentChannelId: gon.currentChannelId,
 };
 const store = createStore(

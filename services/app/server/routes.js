@@ -11,7 +11,6 @@ export default (router, io) => {
       { id: generalChannelId, name: 'general', removable: false },
       { id: randomChannelId, name: 'random', removable: false },
     ],
-    messages: [],
     currentChannelId: generalChannelId,
   };
 
@@ -46,7 +45,6 @@ export default (router, io) => {
     .delete('/channels/:id', (ctx) => {
       const channelId = Number(ctx.params.id);
       state.channels = state.channels.filter(c => c.id !== channelId);
-      state.messages = state.messages.filter(m => m.channelId !== channelId);
       ctx.status = 204;
       const data = {
         data: {
