@@ -2,6 +2,7 @@ import React from 'react';
 import { YMaps, Map } from 'react-yandex-maps';
 import Points from './Points';
 import FormPoint from './FormPoint';
+import myMap from './myMap';
 
 const App = () => (
   <div className="d-flex justify-content-center m-2 flex-row vh-100">

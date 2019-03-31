@@ -4,14 +4,14 @@ import Router from 'koa-router';
 const getNextId = () => Number(_.uniqueId());
 
 export default (router, io) => {
-  const generalChannelId = getNextId();
-  const randomChannelId = getNextId();
+  const homePointId = getNextId();
+  const workPointlId = getNextId();
   const defaultState = {
     points: [
-      { id: generalChannelId, name: 'general', removable: false },
-      { id: randomChannelId, name: 'random', removable: false },
+      { id: homePointId, name: 'home', removable: false },
+      { id: workPointlId, name: 'work', removable: false },
     ],
-    currentPointId: generalChannelId,
+    currentPointId: homePointId,
   };
 
   const state = { ...defaultState };
