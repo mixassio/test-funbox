@@ -17,7 +17,7 @@ const App = () => (
       </div>
     </div>
     <div className="flex-column mr-5 pl-2 w-50">
-      <YMaps onApiAvaliable={ymaps => console.log('eeeeeeeeeeeeeeeeeeee------->>>>>+++++', ymaps)}>
+      <YMaps>
         <div>
           <Map
             state={{ center: [55.75, 37.57], zoom: 9 }} width={500} height={500}
