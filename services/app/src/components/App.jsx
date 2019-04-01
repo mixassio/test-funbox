@@ -1,10 +1,7 @@
 import React from 'react';
-import { YMaps, Map } from 'react-yandex-maps';
 import Points from './Points';
 import FormPoint from './FormPoint';
-import myMap from './myMap';
-
-const handleClick = (event) => console.log('Clicked', event.get('oldCenter'), event.get('newCenter'));
+import MyMap from './MyMap';
 
 const App = () => (
   <div className="d-flex justify-content-center m-2 flex-row vh-100">
@@ -17,14 +14,7 @@ const App = () => (
       </div>
     </div>
     <div className="flex-column mr-5 pl-2 w-50">
-      <YMaps>
-        <div>
-          <Map
-            state={{ center: [55.75, 37.57], zoom: 9 }} width={500} height={500}
-            onBoundschange={handleClick}
-          />
-        </div>
-      </YMaps>
+      <MyMap />
     </div>
   </div>
 );
