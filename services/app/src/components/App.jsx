@@ -4,6 +4,8 @@ import Points from './Points';
 import FormPoint from './FormPoint';
 import myMap from './myMap';
 
+const handleClick = (event) => console.log('Clicked', event.get('oldCenter'), event.get('newCenter'));
+
 const App = () => (
   <div className="d-flex justify-content-center m-2 flex-row vh-100">
     <div className="flex-column ml-5 pr-2 border-right border-warning">
@@ -15,9 +17,12 @@ const App = () => (
       </div>
     </div>
     <div className="flex-column mr-5 pl-2 w-50">
-      <YMaps>
+      <YMaps onApiAvaliable={ymaps => console.log('eeeeeeeeeeeeeeeeeeee------->>>>>+++++', ymaps)}>
         <div>
-          <Map defaultState={{ center: [55.75, 37.57], zoom: 9 }} width={500} height={500} />
+          <Map
+            state={{ center: [55.75, 37.57], zoom: 9 }} width={500} height={500}
+            onBoundschange={handleClick}
+          />
         </div>
       </YMaps>
     </div>
