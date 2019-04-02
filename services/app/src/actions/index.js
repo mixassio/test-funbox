@@ -4,6 +4,8 @@ import routes from '../routes';
 
 export const setCurrentPointId = createAction('SET_POINT_ID');
 
+export const setCurrentCenter = createAction('SET_CURRENT_CENTER');
+
 export const addPointRequest = createAction('POINT_ADD_REQUEST');
 export const addPointSuccess = createAction('POINT_ADD_SUCCESS');
 export const addPointFailure = createAction('POINT_ADD_FAILURE');

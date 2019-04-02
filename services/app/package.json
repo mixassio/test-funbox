@@ -1,8 +1,7 @@
 {
-  "name": "chat_project",
+  "name": "testFunBox",
   "version": "0.0.1",
   "description": "",
-  "main": "dist/index.js",
   "engines": {
     "node": "9"
   },
@@ -11,8 +10,8 @@
     "build-server": "babel server --out-dir dist --source-maps inline",
     "build-app": "npx webpack -p --env production",
     "build": "npm run build-app && npm run build-server",
-    "start": "node dist/bin/slack.js",
-    "develop": "npx nodemon --exec babel-node ./server/bin/slack.js"
+    "start": "node dist/bin/funBox.js",
+    "develop": "npx nodemon --exec babel-node ./server/bin/funBox.js"
   },
   "author": "Mixassio",
   "license": "ISC",

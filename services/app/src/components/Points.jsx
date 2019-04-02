@@ -34,14 +34,10 @@ class Points extends React.Component {
           return (
             <ButtonGroup size="sm" key={el.id}>
               <Button size="sm" onClick={this.setPoint(el.id)} className={btnClass} variant="outline-success">{el.name}</Button>
-              {el.removable
-              && (
-                <ButtonGroup className="m-1">
-                  {<RenamePoint point={el} />}
-                  {<DeletePoint pointId={el.id} />}
-                </ButtonGroup>
-              )
-              }
+              <ButtonGroup className="m-1">
+                {<RenamePoint point={el} />}
+                {<DeletePoint pointId={el.id} />}
+              </ButtonGroup>
             </ButtonGroup>
           );
         })}

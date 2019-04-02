@@ -43,9 +43,9 @@ class DeleteChannel extends React.Component {
 
         <Modal show={show} onHide={this.handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Delete Channell</Modal.Title>
+            <Modal.Title>Delete Point</Modal.Title>
           </Modal.Header>
-          <Modal.Body>This channel will be deleted with all messages</Modal.Body>
+          <Modal.Body>This point will be deleted and way will be reload</Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleClose}>Close</Button>
             <form onSubmit={handleSubmit(this.delete(pointId))}>

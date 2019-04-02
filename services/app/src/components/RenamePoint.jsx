@@ -52,7 +52,7 @@ class RenameChannel extends React.Component {
 
         <Modal show={show} onHide={this.handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Rename channel</Modal.Title>
+            <Modal.Title>Rename point</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <form className="form-inline mt-3" onSubmit={handleSubmit(this.submitRenamePoint(pointId))}>

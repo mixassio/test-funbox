@@ -23,6 +23,7 @@ const devtoolMiddleware = ext && ext();
 const initState = {
   points: _.keyBy(gon.points, 'id'),
   currentPointId: gon.currentPointId,
+  currentCenter: gon.currentCenter,
 };
 const store = createStore(
   reducers,

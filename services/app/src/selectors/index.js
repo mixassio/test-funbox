@@ -6,5 +6,4 @@ const pointsSelector = createSelector(
   points => Object.values(points),
 );
 
-
 export default pointsSelector;

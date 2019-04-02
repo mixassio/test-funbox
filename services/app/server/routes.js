@@ -4,15 +4,18 @@ import Router from 'koa-router';
 const getNextId = () => Number(_.uniqueId());
 
 export default (router, io) => {
-  const homePointId = getNextId();
-  const workPointlId = getNextId();
   const defaultState = {
-    points: [
+    points: [],
+    currentPointId: 0,
+    currentCenter: { center: [55.75, 37.57], zoom: 9 },
+  };
+
+  /**
+ points: [
       { id: homePointId, name: 'home', removable: false },
       { id: workPointlId, name: 'work', removable: false },
     ],
-    currentPointId: homePointId,
-  };
+ */
 
   const state = { ...defaultState };
 
@@ -26,7 +29,6 @@ export default (router, io) => {
       const { data: { attributes: { name } } } = ctx.request.body;
       const point = {
         name,
-        removable: true,
         id: getNextId(),
       };
       state.points.push(point);
