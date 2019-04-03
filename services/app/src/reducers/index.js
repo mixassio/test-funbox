@@ -29,7 +29,6 @@ const points = handleActions({
 
 const currentCenter = handleActions({
   [actions.setCurrentCenter](state, { payload }) {
-    console.log('in reduser, payload -----> ', payload);
     return { ...payload };
   },
 }, {});

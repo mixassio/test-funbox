@@ -2,8 +2,9 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import connect from '../connect';
 
-const mapStateToProps = ({ addPoint }) => ({
+const mapStateToProps = ({ addPoint, currentCenter }) => ({
   addPoint,
+  currentCenter,
 });
 
 @connect(mapStateToProps)
@@ -23,9 +24,9 @@ class FormPoints extends React.Component {
   }
 
   submitPoint = async (value) => {
-    const { reset, addPoint } = this.props;
+    const { reset, addPoint, currentCenter } = this.props;
     try {
-      await addPoint(value.text);
+      await addPoint(value.text, currentCenter);
       reset();
     } catch (e) {
       throw e;

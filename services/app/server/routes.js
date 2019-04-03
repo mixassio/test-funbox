@@ -26,9 +26,10 @@ export default (router, io) => {
       ctx.status = 301;
     })
     .post('/points', (ctx) => {
-      const { data: { attributes: { name } } } = ctx.request.body;
+      const { data: { attributes: { name, center } } } = ctx.request.body;
       const point = {
         name,
+        center,
         id: getNextId(),
       };
       state.points.push(point);

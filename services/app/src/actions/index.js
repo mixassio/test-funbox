@@ -10,12 +10,12 @@ export const addPointRequest = createAction('POINT_ADD_REQUEST');
 export const addPointSuccess = createAction('POINT_ADD_SUCCESS');
 export const addPointFailure = createAction('POINT_ADD_FAILURE');
 
-export const addPoint = name => async (dispatch) => {
+export const addPoint = (name, { center }) => async (dispatch) => {
   dispatch(addPointRequest());
   try {
     const url = routes.point();
     const data = {
-      attributes: { name },
+      attributes: { name, center },
     };
     await axios.post(url, { data });
   } catch (e) {
