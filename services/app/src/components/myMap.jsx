@@ -10,6 +10,7 @@ const mapStateToProps = state => ({
   setCurrentCenter: state.setCurrentCenter,
   currentCenter: state.currentCenter,
   points: pointsSelector(state),
+  renamePoint: state.renamePoint,
 });
 
 @connect(mapStateToProps)
@@ -19,7 +20,10 @@ class MyMap extends React.Component {
     setCurrentCenter({ center: event.get('newCenter'), zoom: event.get('newZoom') });
   };
 
-  handleClick2 = event => console.log(event, event.get('target')['geometry']['_coordinates']);
+  movePoint  = pointId => async (event) => {
+    const newGeoLoc = event.get('target').geometry['_coordinates'];
+    const { renamePoint, reset } = this.props;
+  };
 
 
   render() {
@@ -34,7 +38,7 @@ class MyMap extends React.Component {
                 geometry={center}
                 properties={{ balloonContentBody: 'name' }}
                 options={{ draggable: true }}
-                onDragend={this.handleClick2}
+                onDragend={this.movePoint(id)}
               />
             ))}
             <Polyline
