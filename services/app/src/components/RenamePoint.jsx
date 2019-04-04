@@ -3,8 +3,8 @@ import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { Button, Modal } from 'react-bootstrap';
 import connect from '../connect';
 
-const mapStateToProps = ({ renamePoint }) => ({
-  renamePoint,
+const mapStateToProps = ({ changePoint }) => ({
+  changePoint,
 });
 
 @connect(mapStateToProps)
@@ -22,10 +22,10 @@ class RenameChannel extends React.Component {
   }
 
   submitRenamePoint = pointId => async (value) => {
-    const { renamePoint, reset } = this.props;
+    const { changePoint, reset } = this.props;
     try {
-      await renamePoint({
-        name: value.text,
+      await changePoint({
+        change: { name: value.text },
         pointId,
       });
     } catch (e) {

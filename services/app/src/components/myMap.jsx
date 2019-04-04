@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
   setCurrentCenter: state.setCurrentCenter,
   currentCenter: state.currentCenter,
   points: pointsSelector(state),
-  renamePoint: state.renamePoint,
+  changePoint: state.changePoint,
 });
 
 @connect(mapStateToProps)
@@ -20,9 +20,18 @@ class MyMap extends React.Component {
     setCurrentCenter({ center: event.get('newCenter'), zoom: event.get('newZoom') });
   };
 
-  movePoint  = pointId => async (event) => {
+  movePoint = pointId => async (event) => {
+    // eslint-disable-next-line dot-notation
     const newGeoLoc = event.get('target').geometry['_coordinates'];
-    const { renamePoint, reset } = this.props;
+    const { changePoint } = this.props;
+    try {
+      await changePoint({
+        change: { center: newGeoLoc },
+        pointId,
+      });
+    } catch (e) {
+      throw e;
+    }
   };
 
 

@@ -43,8 +43,8 @@ socket.on('newPoint', ({ data: { attributes } }) => {
 socket.on('removePoint', ({ data }) => {
   store.dispatch(actions.deletePointSuccess(data));
 });
-socket.on('renamePoint', ({ data }) => {
-  store.dispatch(actions.renamePointSuccess(data));
+socket.on('changePoint', ({ data }) => {
+  store.dispatch(actions.changePointSuccess(data));
 });
 // -------------
 

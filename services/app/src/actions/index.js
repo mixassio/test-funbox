@@ -39,21 +39,19 @@ export const deletePoint = id => async (dispatch) => {
   }
 };
 
-export const renamePointRequest = createAction('POINT_RENAME_REQUEST');
-export const renamePointSuccess = createAction('POINT_RENAME_SUCCESS');
-export const renamePointFailure = createAction('POINT_RENAME_FAILURE');
+export const changePointRequest = createAction('POINT_CHANGE_REQUEST');
+export const changePointSuccess = createAction('POINT_CHANGE_SUCCESS');
+export const changePointFailure = createAction('POINT_CHANGE_FAILURE');
 
-export const renamePoint = ({ pointId, name }) => async (dispatch) => {
-  dispatch(renamePointRequest());
+export const changePoint = ({ pointId, change }) => async (dispatch) => {
+  dispatch(changePointRequest());
   try {
     const url = routes.points(pointId);
     const data = {
-      attributes: {
-        name,
-      },
+      attributes: { ...change },
     };
     await axios.patch(url, { data });
   } catch (e) {
-    dispatch(renamePointFailure());
+    dispatch(changePointFailure());
   }
 };

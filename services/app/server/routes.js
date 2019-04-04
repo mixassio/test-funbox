@@ -59,9 +59,12 @@ export default (router, io) => {
     .patch('/points/:id', (ctx) => {
       const pointId = Number(ctx.params.id);
       const point = state.points.find(c => c.id === pointId);
-
       const { attributes } = ctx.request.body.data;
-      point.name = attributes.name;
+      if (attributes.name) {
+        point.name = attributes.name;
+      } else {
+        point.center = attributes.center;
+      }
       ctx.status = 204;
       const data = {
         data: {
@@ -70,7 +73,7 @@ export default (router, io) => {
           attributes: point,
         },
       };
-      io.emit('renamePoint', data);
+      io.emit('changePoint', data);
     });
 
   return router

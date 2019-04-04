@@ -22,7 +22,7 @@ const points = handleActions({
   [actions.deletePointSuccess](state, { payload }) {
     return _.omit(state, payload.id);
   },
-  [actions.renamePointSuccess](state, { payload: { id, attributes } }) {
+  [actions.changePointSuccess](state, { payload: { id, attributes } }) {
     return { ...state, [id]: attributes };
   },
 }, {});
