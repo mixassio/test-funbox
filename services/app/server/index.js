@@ -11,6 +11,7 @@ import Router from 'koa-router';
 import koaLogger from 'koa-logger';
 import koaWebpack from 'koa-webpack';
 import bodyParser from 'koa-bodyparser';
+import favicon from 'koa-favicon';
 import session from 'koa-generic-session';
 import _ from 'lodash';
 import addRoutes from './routes';
@@ -25,6 +26,7 @@ export default () => {
 
   app.keys = ['some secret hurr'];
   app.use(session(app));
+  app.use(favicon());
   app.use(bodyParser());
   // app.use(serve(path.join(__dirname, '..', 'public')));
   if (isDevelopment) {
