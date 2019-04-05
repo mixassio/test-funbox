@@ -1,7 +1,6 @@
 import React from 'react';
 import { ListGroup, Button, ButtonGroup } from 'react-bootstrap';
 import { SortableContainer, SortableElement, sortableHandle } from 'react-sortable-hoc';
-import arrayMove from 'array-move';
 import connect from '../connect';
 import pointsSelector from '../selectors';
 import DeletePoint from './DeletePoint';
@@ -31,22 +30,19 @@ const SortableList = SortableContainer(({ items }) => (
 
 const mapStateToProps = state => ({
   points: pointsSelector(state),
+  movePoint: state.movePoint,
 });
 
 @connect(mapStateToProps)
 class Points extends React.Component {
-  state = {
-    items: this.props.points,
-  };
-
   onSortEnd = ({ oldIndex, newIndex }) => {
-    this.setState(({ items }) => ({
-      items: arrayMove(items, oldIndex, newIndex),
-    }));
+    const { movePoint } = this.props;
+    movePoint(oldIndex, newIndex);
   };
 
   render() {
-    return <SortableList items={this.state.items} onSortEnd={this.onSortEnd} />;
+    const { points } = this.props;
+    return <SortableList items={points} onSortEnd={this.onSortEnd} />;
   }
 }
 export default Points;

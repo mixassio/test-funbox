@@ -25,6 +25,9 @@ const points = handleActions({
   [actions.changePointSuccess](state, { payload: { id, attributes } }) {
     return { ...state, [id]: attributes };
   },
+  [actions.movePointSuccess](state, { payload: { mutateArray } }) {
+    return _.keyBy(mutateArray, 'id');
+  },
 }, {});
 
 const currentCenter = handleActions({

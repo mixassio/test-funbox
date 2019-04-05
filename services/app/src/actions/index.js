@@ -55,3 +55,21 @@ export const changePoint = ({ pointId, change }) => async (dispatch) => {
     dispatch(changePointFailure());
   }
 };
+
+export const movePointRequest = createAction('MOVE_POINT_REQUEST');
+export const movePointSuccess = createAction('MOVE_SUCCESS');
+export const movePointFailure = createAction('MOVE_FAILURE');
+
+export const movePoint = (oldIndex, newIndex) => async (dispatch) => {
+  dispatch(movePointRequest());
+  try {
+    const url = routes.point();
+    const data = {
+      attributes: { oldIndex, newIndex },
+    };
+    await axios.put(url, { data });
+  } catch (e) {
+    dispatch(movePointFailure());
+    throw e;
+  }
+};

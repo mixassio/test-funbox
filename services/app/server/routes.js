@@ -1,7 +1,8 @@
 import _ from 'lodash';
 import Router from 'koa-router';
+import arrayMove from 'array-move';
 
-const getNextId = () => Number(_.uniqueId());
+const getNextId = () => Number(_.uniqueId()) - 1;
 
 export default (router, io) => {
   const defaultState = {
@@ -74,6 +75,22 @@ export default (router, io) => {
         },
       };
       io.emit('changePoint', data);
+    })
+    .put('/points', (ctx) => {
+      console.log('hello')
+      const { attributes } = ctx.request.body.data;
+      console.log(attributes)
+      console.log(state.points)
+      state.points = arrayMove(state.points, attributes.oldIndex, attributes.newIndex)
+        .map((el, ind) => ({ ...el, id: ind }));
+      console.log(state.points)
+      ctx.status = 204;
+      const data = {
+        data: {
+          mutateArray: state.points,
+        },
+      };
+      io.emit('movePoint', data);
     });
 
   return router

@@ -46,6 +46,9 @@ socket.on('removePoint', ({ data }) => {
 socket.on('changePoint', ({ data }) => {
   store.dispatch(actions.changePointSuccess(data));
 });
+socket.on('movePoint', ({ data }) => {
+  store.dispatch(actions.movePointSuccess(data));
+});
 // -------------
 
 if (process.env.NODE_ENV !== 'production') {
