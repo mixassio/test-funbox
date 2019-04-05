@@ -47,7 +47,7 @@ class FormPoints extends React.Component {
           disabled={submitting}
           className="w-75 border border-info"
         />
-        <button type="submit" className="ml-1 btn btn-primary btn-sm" disabled={submitting}>Send</button>
+        <button type="submit" className="ml-1 btn btn-primary btn-sm" disabled={submitting}>new</button>
       </form>
     );
   }

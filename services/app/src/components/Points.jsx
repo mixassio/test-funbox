@@ -13,8 +13,8 @@ const SortableItem = SortableElement(({ value }) => (
     <DragHandle />
     <Button size="xs" className="w-100 m-1" variant="outline-success">{value.name}</Button>
     <ButtonGroup className="m-1">
-      {<RenamePoint point={value} />}
-      {<DeletePoint pointId={value.id} />}
+      <RenamePoint point={value} />
+      <DeletePoint pointId={value.id} />
     </ButtonGroup>
   </ButtonGroup>
 ));
@@ -42,7 +42,7 @@ class Points extends React.Component {
 
   render() {
     const { points } = this.props;
-    return <SortableList items={points} onSortEnd={this.onSortEnd} />;
+    return <SortableList items={points} onSortEnd={this.onSortEnd} useDragHandle />;
   }
 }
 export default Points;

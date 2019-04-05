@@ -77,13 +77,9 @@ export default (router, io) => {
       io.emit('changePoint', data);
     })
     .put('/points', (ctx) => {
-      console.log('hello')
       const { attributes } = ctx.request.body.data;
-      console.log(attributes)
-      console.log(state.points)
       state.points = arrayMove(state.points, attributes.oldIndex, attributes.newIndex)
         .map((el, ind) => ({ ...el, id: ind }));
-      console.log(state.points)
       ctx.status = 204;
       const data = {
         data: {
