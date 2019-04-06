@@ -4,17 +4,6 @@ import { handleActions } from 'redux-actions';
 import { reducer as formReducer } from 'redux-form';
 import * as actions from '../actions';
 
-const defaultPoint = 0;
-
-const currentPointId = handleActions({
-  [actions.setCurrentPointId](state, { payload: pointId }) {
-    return pointId;
-  },
-  [actions.deletePointSuccess]() {
-    return defaultPoint;
-  },
-}, '');
-
 const points = handleActions({
   [actions.addPointSuccess](state, { payload }) {
     return { ...state, [payload.id]: payload };
@@ -37,7 +26,6 @@ const currentCenter = handleActions({
 }, {});
 
 export default combineReducers({
-  currentPointId,
   points,
   currentCenter,
   form: formReducer,

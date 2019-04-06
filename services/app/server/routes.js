@@ -7,16 +7,8 @@ const getNextId = () => Number(_.uniqueId()) - 1;
 export default (router, io) => {
   const defaultState = {
     points: [],
-    currentPointId: 0,
     currentCenter: { center: [55.75, 37.57], zoom: 9 },
   };
-
-  /**
- points: [
-      { id: homePointId, name: 'home', removable: false },
-      { id: workPointlId, name: 'work', removable: false },
-    ],
- */
 
   const state = { ...defaultState };
 
