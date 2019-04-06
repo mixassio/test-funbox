@@ -34,7 +34,6 @@ class MyMap extends React.Component {
     }
   };
 
-
   render() {
     const { currentCenter, points } = this.props;
     return (
@@ -43,9 +42,10 @@ class MyMap extends React.Component {
           <Map state={currentCenter} width={500} height={500} onBoundschange={this.handleClick}>
             {points.map(({ center, id, name }) => (
               <Placemark
+                modules={['geoObject.addon.balloon']}
                 key={id}
                 geometry={center}
-                properties={{ balloonContentBody: 'name' }}
+                properties={{ balloonContent: name }}
                 options={{ draggable: true }}
                 onDragend={this.movePoint(id)}
               />
@@ -54,8 +54,7 @@ class MyMap extends React.Component {
               geometry={points.map(({ center }) => center)}
               options={{
                 balloonCloseButton: true,
-                strokeColor: '#000',
-                strokeWidth: 4,
+                strokeWidth: 3,
                 strokeOpacity: 0.5,
               }}
             />
