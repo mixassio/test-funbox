@@ -51,10 +51,10 @@ socket.on('movePoint', ({ data }) => {
 // -------------
 
 if (process.env.NODE_ENV !== 'production') {
-  localStorage.debug = 'chat:*';
+  localStorage.debug = 'funbox:*';
 }
 ReactDOM.render((
   <Provider store={store}>
     <App />
   </Provider>
-), document.getElementById('chat'));
+), document.getElementById('funbox'));

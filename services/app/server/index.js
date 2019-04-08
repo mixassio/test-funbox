@@ -20,7 +20,7 @@ import webpackConfig from '../webpack.config';
 
 const isProduction = process.env.NODE_ENV === 'production';
 const isDevelopment = !isProduction;
-
+console.log(isDevelopment);
 export default () => {
   const app = new Koa();
 
@@ -28,7 +28,8 @@ export default () => {
   app.use(session(app));
   app.use(favicon());
   app.use(bodyParser());
-  // app.use(serve(path.join(__dirname, '..', 'public')));
+  // app.use(serve(path.join(__dirname, '..', 'dist', 'public')));
+
   if (isDevelopment) {
     koaWebpack({
       config: webpackConfig,
@@ -39,6 +40,7 @@ export default () => {
     const urlPrefix = '/assets';
     const assetsPath = path.resolve(`${__dirname}/../dist/public`);
     app.use(mount(urlPrefix, serve(assetsPath)));
+    // app.use(serve(path.join(__dirname, '..', 'dist', 'public')));
   }
 
   const router = new Router();
