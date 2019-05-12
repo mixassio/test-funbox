@@ -1,5 +1,3 @@
-// @flow
-
 import path from 'path';
 import Koa from 'koa';
 import Pug from 'koa-pug';
@@ -9,18 +7,17 @@ import mount from 'koa-mount';
 import serve from 'koa-static';
 import Router from 'koa-router';
 import koaLogger from 'koa-logger';
-import koaWebpack from 'koa-webpack';
+// import koaWebpack from 'koa-webpack';
 import bodyParser from 'koa-bodyparser';
 import favicon from 'koa-favicon';
 import session from 'koa-generic-session';
 import _ from 'lodash';
 import addRoutes from './routes';
 
-import webpackConfig from '../webpack.config';
+// import webpackConfig from '../webpack.dev';
 
-const isProduction = process.env.NODE_ENV === 'production';
-const isDevelopment = !isProduction;
-console.log(isDevelopment);
+// const isProduction = process.env.NODE_ENV === 'production';
+// const isDevelopment = !isProduction;
 export default () => {
   const app = new Koa();
 
@@ -28,11 +25,22 @@ export default () => {
   app.use(session(app));
   app.use(favicon());
   app.use(bodyParser());
-  // app.use(serve(path.join(__dirname, '..', 'dist', 'public')));
 
+  // app.use(serve(path.join(__dirname, '..', 'dist', 'public')));
+  const urlPrefix = '/assets';
+  const assetsPath = path.resolve(`${__dirname}/../dist/public`);
+  app.use(mount(urlPrefix, serve(assetsPath)));
+  /*
   if (isDevelopment) {
     koaWebpack({
       config: webpackConfig,
+      hotClient: {
+        host: {
+          client: '*',
+          server: '0.0.0.0',
+        },
+        port: 9000,
+      },
     }).then((middleware) => {
       app.use(middleware);
     });
@@ -40,9 +48,8 @@ export default () => {
     const urlPrefix = '/assets';
     const assetsPath = path.resolve(`${__dirname}/../dist/public`);
     app.use(mount(urlPrefix, serve(assetsPath)));
-    // app.use(serve(path.join(__dirname, '..', 'dist', 'public')));
   }
-
+*/
   const router = new Router();
 
   app.use(koaLogger());
